@@ -1,0 +1,34 @@
+
+    // 将历史记录保存到localStorage中
+    let history = localStorage.getItem("history");
+    if (history) {
+        history = JSON.parse(history);
+    } else {
+        history = [];
+    }
+    history.push(result + " = " + calculatedResult);
+    localStorage.setItem("history", JSON.stringify(history));
+}
+
+function displayHistory() {
+    let history = localStorage.getItem("history");
+    if (history) {
+        history = JSON.parse(history);
+    } else {
+        history = [];
+    }
+    
+    let historyList = document.getElementById("history-list");
+    historyList.innerHTML = "";
+    
+    for (let i = 0; i < history.length; i++) {
+        let item = document.createElement("li");
+        item.textContent = history[i];
+        historyList.appendChild(item);
+    }
+}
+function clearHistory() {
+    localStorage.removeItem("history");
+    displayHistory();
+}
+</script>
